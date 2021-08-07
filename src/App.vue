@@ -4,15 +4,37 @@
     <router-link to="/about">About</router-link> |
     <router-link :to="{name:'Jobs'}">Jobs</router-link>
     
-
     <!-- Normal link -->
     <!-- <a href="/about">About</a> -->
   </div>
 
   <!-- Inject page -->
   <router-view/>
+
+  <button @click="redirect">Redirect</button>
+  <button @click="goBack">Go Back</button>
+  <button @click="goForward">Go Forward</button>
   
 </template>
+
+<script>
+export default {
+  methods:{
+    goBack(){
+      return this.$router.go(-1);
+    },
+    goForward(){
+      return this.$router.go(1);
+    },
+    redirect(){
+      //Code....
+
+      //Redirect
+      return this.$router.push({name:'Home'});
+    }
+  }
+}
+</script>
 
 <style>
 #app {
@@ -27,12 +49,15 @@
   padding: 30px;
 }
 
-#nav a {
+#nav a{
   font-weight: bold;
-  color: #2c3e50;
+  color: black;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #fff;
+  background: crimson;
+  padding:10px;
+  border-radius: 10px;
 }
 </style>
