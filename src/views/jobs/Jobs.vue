@@ -12,12 +12,25 @@
 export default {
     data(){
         return{
-            jobs:[
-               {id:1,title:'project manager',details:'Creative Coder Project Manager'},
-               {id:2,title:'designer',details:'Creative Coder Designer'},
-               {id:3,title:'developer',details:'Creative Coder Developer'}
-            ]
+            jobs:[]
         }
+    },
+    mounted(){
+        fetch('http://localhost:3000/jobs').
+        then((response)=>{
+            if(response.status===404){
+                throw new Error('Link not found');
+            }
+            else{
+                return response.json();
+            }
+        }).
+        then((datas)=>{
+            this.jobs=datas;
+        }).
+        catch((err)=>{
+            console.log(err.message);
+        });
     }
 }
 </script>
